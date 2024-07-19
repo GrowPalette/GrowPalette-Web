@@ -12,5 +12,4 @@ const ActivityList = () => {
 export default ActivityList
 
 const Container = styled.div`
-
 `
