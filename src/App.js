@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { RecoilRoot } from 'recoil'; // RecoilRoot를 추가하여 Recoil 상태를 전역적으로 관리합니다
 
 // pages
 import Landing from './pages/Landing';
@@ -31,49 +32,55 @@ import EnterGoalCategory from './pages/Goal/EnterGoalCategory';
 import EnterGoalTerm from './pages/Goal/EnterGoalTerm';
 import GoalDone from './pages/Goal/GoalDone';
 
+//components (Recoil managed)
+/* import PascalCase from './pages/Login/components/컴포넌트폴더명/컴포넌트명*/
+
 function App() {
     return (
-        <div>
-            <Routes>
-                {/* Landing */}
-                <Route index element={<Landing />} />
+        <RecoilRoot>
+            <div>
+                <Routes>
+                    {/* Landing */}
+                    <Route index element={<Landing />} />
 
-                {/* 로그인 페이지 */}
-                <Route path="/login" element={<Login />} />
+                    {/* 로그인 페이지 */}
+                    <Route path="/login" element={<Login />} />
 
-                {/* 약관 페이지 */}
-                <Route path="/agreement" element={<Agreement />} /> {/* 오타 수정 */}
+                    {/* 약관 페이지 */}
+                    <Route path="/agreement" element={<Agreement />} /> {/* 오타 수정 */}
 
-                {/* 회원가입 페이지 */}
-                <Route path="/signup" element={<SignUp />} />
+                    {/* 회원가입 페이지 */}
+                    <Route path="/signup" element={<SignUp />} />
 
-                {/* OnBoarding */}
-                <Route path="/onboarding" element={<OnBoarding />} />
-                <Route path="/onboarding_next" element={<OnBoardingNext />} />
-                <Route path="/onboarding_success" element={<OnBoardingSuccess />} />
+                    {/* OnBoarding */}
+                    <Route path="/onboarding" element={<OnBoarding />} />
+                    <Route path="/onboarding_next" element={<OnBoardingNext />} />
+                    <Route path="/onboarding_success" element={<OnBoardingSuccess />} />
 
-                {/* ActivityList */}
-                <Route path="/activity_list" element={<ActivityList />} />
-                <Route path="/enter_activity" element={<EnterActivity />} />
-                <Route path="/activity_detail/:id" element={<EnterActivityDetail />} />
-                <Route path="/activity_category" element={<EnterActivityCategory />} />
-                <Route path="/activity_term" element={<EnterActivityTerm />} />
-                <Route path="/activity_detail" element={<ActivityDetail />} />
-                <Route path="/growth_ai" element={<GrowthAi />} />
+                    {/* ActivityList */}
+                    <Route path="/activity_list" element={<ActivityList />} />
+                    <Route path="/enter_activity" element={<EnterActivity />} />
+                    <Route path="/activity_detail/:id" element={<EnterActivityDetail />} />
+                    <Route path="/activity_category" element={<EnterActivityCategory />} />
+                    <Route path="/activity_term" element={<EnterActivityTerm />} />
+                    <Route path="/activity_detail" element={<ActivityDetail />} />
+                    <Route path="/growth_ai" element={<GrowthAi />} />
 
-                {/* MyPage */}
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/mypage_edit" element={<MyPageEdit />} />
-                <Route path="/mypage_setting" element={<MyPageSettings />} />
+                    {/* MyPage */}
+                    <Route path="/mypage" element={<MyPage />} />
+                    <Route path="/mypage_edit" element={<MyPageEdit />} />
+                    <Route path="/mypage_setting" element={<MyPageSettings />} />
 
-                {/* Goal */}
-                <Route path="/goal" element={<Goal />} />
-                <Route path="/enter_goal" element={<EnterGoal />} />
-                <Route path="/goal_category" element={<EnterGoalCategory />} />
-                <Route path="/goal_term" element={<EnterGoalTerm />} />
-                <Route path="/goal_done" element={<GoalDone />} />
-            </Routes>
-        </div>
+                    {/* Goal */}
+                    <Route path="/goal" element={<Goal />} />
+                    <Route path="/enter_goal" element={<EnterGoal />} />
+                    <Route path="/goal_category" element={<EnterGoalCategory />} />
+                    <Route path="/goal_term" element={<EnterGoalTerm />} />
+                    <Route path="/goal_done" element={<GoalDone />} />
+                </Routes>
+                {/* <PascalCase /> */}
+            </div>
+        </RecoilRoot>
     );
 }
 
