@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const EnterGoal = () => {
+const BottomNavbar = () => {
   return <Container></Container>;
 };
 
-export default EnterGoal;
+export default BottomNavbar;
 
 const Container = styled.div``;
