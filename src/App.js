@@ -33,12 +33,12 @@ import EnterGoalTerm from "./pages/Goal/EnterGoalTerm";
 import GoalDone from "./pages/Goal/GoalDone";
 
 //components (Recoil managed)
-/* import PascalCase from './pages/Login/components/컴포넌트폴더명/컴포넌트명*/
+// import BottomNavbar from "./components/BottomNavbar"; // BottomNavbar를 임포트합니다
 
 function App() {
   return (
     <RecoilRoot>
-      <div>
+      <div style={{ position: "relative", minHeight: "100vh" }}>
         <Routes>
           {/* Landing */}
           <Route index element={<Landing />} />
@@ -77,7 +77,6 @@ function App() {
           <Route path="/goal_term" element={<EnterGoalTerm />} />
           <Route path="/goal_done" element={<GoalDone />} />
         </Routes>
-        {/* <PascalCase /> */}
       </div>
     </RecoilRoot>
   );

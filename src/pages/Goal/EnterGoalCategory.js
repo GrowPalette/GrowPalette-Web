@@ -38,7 +38,8 @@ const EnterGoalCategory = () => {
           </TagBox>
         ))}
       </CategoryTagContainer>
-      <BottomNavbar /> {/* 하단 네비게이션 바 추가 */}
+
+      <BottomNavbar />
     </Container>
   );
 };
