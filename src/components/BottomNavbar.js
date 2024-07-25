@@ -41,14 +41,20 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px; // BottomNavbar의 높이
+  max-width: 390px; // #root의 너비에 맞게 조정
+  height: 60px; // 높이 설정
   background-color: #fff; // 배경 색상
   border-top: 1px solid #ddd; // 상단 테두리
   box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); // 하단 그림자
   z-index: 1000; // 다른 요소 위에 표시되도록 설정
+  margin: 0 auto; // 중앙 정렬
+  left: calc(50% - 195px); // #root의 중앙에 맞추기 (390px의 절반 - 195px)
 
   @media (max-width: 389px) {
-    height: 50px; // 모바일 화면에서는 높이를 줄일 수 있습니다.
+    height: 50px; // 모바일 화면에서 높이 줄이기
+    max-width: 100%; // 모바일 화면에서 너비 100%로 설정
+    left: 0; // 모바일 화면에서는 left를 0으로 설정하여 전체 너비를 차지하게 함
+    right: 0; // 모바일 화면에서는 right를 0으로 설정하여 전체 너비를 차지하게 함
   }
 `;
 
@@ -64,7 +70,7 @@ const Icon = styled.img`
   height: 24px;
 
   @media (max-width: 389px) {
-    width: 20px; // 모바일 화면에서 아이콘 크기를 줄입니다.
+    width: 20px; // 모바일 화면에서 아이콘 크기 줄이기
     height: 20px;
   }
 `;
@@ -75,7 +81,7 @@ const Label = styled.span`
   margin-top: 4px;
 
   @media (max-width: 389px) {
-    font-size: 10px; // 모바일 화면에서 글자 크기를 줄입니다.
+    font-size: 10px; // 모바일 화면에서 글자 크기 줄이기
   }
 `;
 
