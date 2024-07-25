@@ -6,6 +6,7 @@ import termIcon from "../../assets/images/term.svg";
 import addIcon from "../../assets/images/add.svg"; // add.svg 이미지 추가
 import categoryIcon from "../../assets/images/categoryIcon.svg";
 import suggestIcon from "../../assets/images/suggest.svg";
+
 const EnterGoal = () => {
   const [inputValue, setInputValue] = useState(""); // 입력값 상태 관리
 
@@ -55,6 +56,7 @@ const EnterGoal = () => {
         <TermContainer>
           <TermIcon src={suggestIcon} alt="추천 목표" />
           <TermText>추천 목표</TermText>
+          {/* 버튼이 없는 경우를 처리하기 위해 추가적인 스타일을 설정할 수 있습니다. */}
         </TermContainer>
         <InputContainer>
           <Input
@@ -68,6 +70,10 @@ const EnterGoal = () => {
           )}
         </InputContainer>
       </ContentContainer>
+      <ButtonContainer>
+        <SaveButton>임시 저장</SaveButton>
+        <UploadButton>업로드</UploadButton>
+      </ButtonContainer>
     </Container>
   );
 };
@@ -191,7 +197,6 @@ const TermIcon = styled.img`
 
 const TermText = styled.span`
   font-size: 16px;
-
   color: #000; /* 텍스트 색상 */
   margin-right: auto; /* 텍스트를 아이콘에 가깝게 붙이기 */
   font-weight: bold;
@@ -202,11 +207,10 @@ const AddButton = styled.button`
   display: flex;
   width: 103px;
   height: 36px;
-  align-items: center;
   background-color: #c9bc9c; /* 버튼 배경색 */
   border: none;
   border-radius: 3px;
-  padding: 8px 28px 8px 28px;
+  padding: 8px 28px;
   cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
   font-size: 12px;
   color: #000; /* 버튼 텍스트 색상 */
@@ -217,11 +221,10 @@ const AddButton2 = styled.button`
   display: flex;
   width: 103px;
   height: 36px;
-  align-items: center;
   background-color: #9fc7c0; /* 버튼 배경색 */
   border: none;
   border-radius: 3px;
-  padding: 8px 28px 8px 28px;
+  padding: 8px 28px;
   cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
   font-size: 12px;
   color: #000; /* 버튼 텍스트 색상 */
@@ -235,4 +238,39 @@ const AddButtonText = styled.span`
 const AddButtonIcon = styled.img`
   width: 16px; /* 아이콘 크기 조정 */
   height: 16px;
+`;
+
+// 추가된 부분
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 24px;
+  bottom: 0;
+  margin-top: 270px;
+  background: #fff; /* 배경색 설정 */
+`;
+
+const SaveButton = styled.button`
+  flex: 1;
+  height: 50px;
+  background-color: #fff; /* 흰색 배경 */
+  border: 1px solid #000; /* 검정 테두리 */
+  border-radius: 5px;
+  color: #000; /* 검정색 텍스트 */
+  font-size: 16px;
+  cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
+  margin-right: 10px; /* 버튼 간격 조정 */
+`;
+
+const UploadButton = styled.button`
+  flex: 1;
+  height: 50px;
+  background-color: #000; /* 검정색 배경 */
+  border: none;
+  border-radius: 5px;
+  color: #fff; /* 흰색 텍스트 */
+  font-size: 16px;
+  cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
+  margin-left: 10px; /* 버튼 간격 조정 */
 `;
