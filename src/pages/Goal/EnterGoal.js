@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import backIcon from "../../assets/images/back.svg";
-import termIcon from "../../assets/images/term.svg"; // term.svg 이미지 추가
-
+import termIcon from "../../assets/images/term.svg";
+import addIcon from "../../assets/images/add.svg"; // add.svg 이미지 추가
+import categoryIcon from "../../assets/images/categoryIcon.svg";
+import suggestIcon from "../../assets/images/suggest.svg";
 const EnterGoal = () => {
   const [inputValue, setInputValue] = useState(""); // 입력값 상태 관리
 
@@ -37,7 +39,34 @@ const EnterGoal = () => {
         <TermContainer>
           <TermIcon src={termIcon} alt="기간" />
           <TermText>기간</TermText>
+          <AddButton>
+            <AddButtonText>추가</AddButtonText>
+            <AddButtonIcon src={addIcon} alt="추가" />
+          </AddButton>
         </TermContainer>
+        <TermContainer>
+          <TermIcon src={categoryIcon} alt="카테고리" />
+          <TermText>카테고리</TermText>
+          <AddButton2>
+            <AddButtonText>추가</AddButtonText>
+            <AddButtonIcon src={addIcon} alt="추가" />
+          </AddButton2>
+        </TermContainer>
+        <TermContainer>
+          <TermIcon src={suggestIcon} alt="추천 목표" />
+          <TermText>추천 목표</TermText>
+        </TermContainer>
+        <InputContainer>
+          <Input
+            value={inputValue}
+            onChange={handleChange} // 입력값 상태 업데이트
+            placeholder=" " // 플레이스홀더를 공백으로 설정하여 실제 플레이스홀더 텍스트를 숨김
+          />
+          {/* 플레이스홀더가 입력값이 있을 때 사라지도록 설정 */}
+          {!inputValue.length && (
+            <InputPlaceholder>랜덤으로 추천 목표 생성</InputPlaceholder>
+          )}
+        </InputContainer>
       </ContentContainer>
     </Container>
   );
@@ -150,6 +179,8 @@ const TermContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 20px; /* 상단 여백 추가 */
+  width: 100%; /* 전체 너비 사용 */
+  justify-content: space-between; /* 아이콘, 텍스트, 버튼을 양 끝에 배치 */
 `;
 
 const TermIcon = styled.img`
@@ -160,5 +191,48 @@ const TermIcon = styled.img`
 
 const TermText = styled.span`
   font-size: 16px;
+
   color: #000; /* 텍스트 색상 */
+  margin-right: auto; /* 텍스트를 아이콘에 가깝게 붙이기 */
+  font-weight: bold;
+`;
+
+const AddButton = styled.button`
+  align-items: center; /* 수평 중앙 정렬 */
+  display: flex;
+  width: 103px;
+  height: 36px;
+  align-items: center;
+  background-color: #c9bc9c; /* 버튼 배경색 */
+  border: none;
+  border-radius: 3px;
+  padding: 8px 28px 8px 28px;
+  cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
+  font-size: 12px;
+  color: #000; /* 버튼 텍스트 색상 */
+`;
+
+const AddButton2 = styled.button`
+  align-items: center; /* 수평 중앙 정렬 */
+  display: flex;
+  width: 103px;
+  height: 36px;
+  align-items: center;
+  background-color: #9fc7c0; /* 버튼 배경색 */
+  border: none;
+  border-radius: 3px;
+  padding: 8px 28px 8px 28px;
+  cursor: pointer; /* 클릭 시 포인터 모양으로 변경 */
+  font-size: 12px;
+  color: #000; /* 버튼 텍스트 색상 */
+`;
+
+const AddButtonText = styled.span`
+  margin-right: 5px; /* 텍스트와 아이콘 간격 조정 */
+  font-weight: bold;
+`;
+
+const AddButtonIcon = styled.img`
+  width: 16px; /* 아이콘 크기 조정 */
+  height: 16px;
 `;
