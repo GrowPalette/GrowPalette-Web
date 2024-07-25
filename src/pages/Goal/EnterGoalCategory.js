@@ -1,7 +1,9 @@
+// src/pages/Goal/EnterGoalCategory.js
 import React, { useState } from "react";
 import styled from "styled-components";
 import backIcon from "../../assets/images/back.svg";
 import categoryIcon from "../../assets/images/categoryIcon.svg";
+import BottomNavbar from "../../components/BottomNavbar";
 
 const EnterGoalCategory = () => {
   const [selectedTag, setSelectedTag] = useState(null); // 선택된 태그를 상태로 관리
@@ -36,6 +38,7 @@ const EnterGoalCategory = () => {
           </TagBox>
         ))}
       </CategoryTagContainer>
+      <BottomNavbar /> {/* 하단 네비게이션 바 추가 */}
     </Container>
   );
 };
@@ -59,6 +62,7 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  padding-bottom: 60px; // BottomNavbar의 높이 만큼의 여백을 추가
 `;
 
 const BackContainer = styled.div`
