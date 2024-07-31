@@ -1,10 +1,9 @@
 // src/pages/Goal/EnterGoalCategory.js
-//http://localhost:3000/goal_category
+// http://localhost:3000/goal_category
 import React, { useState } from "react";
 import styled from "styled-components";
-import backIcon from "../../assets/images/back.svg";
 import categoryIcon from "../../assets/images/categoryIcon.svg";
-// import BottomNavbar from "../../components/BottomNavbar";
+import BackButton from "../../components/BackButton"; // BackButton 컴포넌트 임포트
 
 const EnterGoalCategory = () => {
   const [selectedTag, setSelectedTag] = useState(null); // 선택된 태그를 상태로 관리
@@ -20,10 +19,7 @@ const EnterGoalCategory = () => {
 
   return (
     <Container>
-      <BackContainer>
-        <StyledBackIcon src={backIcon} alt="뒤로가기" />
-        <BackText>Back</BackText>
-      </BackContainer>
+      <BackButton /> {/* BackButton 컴포넌트 사용 */}
       <CategoryContainer>
         <StyledCategoryIcon src={categoryIcon} alt="카테고리 아이콘" />
         <CategoryText>카테고리</CategoryText>
@@ -39,7 +35,6 @@ const EnterGoalCategory = () => {
           </TagBox>
         ))}
       </CategoryTagContainer>
-
       {/* <BottomNavbar /> */}
     </Container>
   );
@@ -59,6 +54,7 @@ const tags = [
 ];
 
 export default EnterGoalCategory;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,27 +62,6 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   padding-bottom: 60px;
-`;
-
-const BackContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  gap: 12px;
-  z-index: 10;
-`;
-
-const StyledBackIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const BackText = styled.span`
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
 `;
 
 const CategoryContainer = styled.div`

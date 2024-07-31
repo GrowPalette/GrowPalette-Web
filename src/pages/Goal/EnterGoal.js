@@ -1,31 +1,27 @@
 // src/pages/Goal/EnterGoal.js
-//http://localhost:3000/enter_goal
 import React, { useState } from "react";
 import styled from "styled-components";
-import backIcon from "../../assets/images/back.svg";
+import BackButton from "../../components/BackButton";
 import termIcon from "../../assets/images/term.svg";
 import addIcon from "../../assets/images/add.svg";
 import categoryIcon from "../../assets/images/categoryIcon.svg";
 import suggestIcon from "../../assets/images/suggest.svg";
 
 const EnterGoal = () => {
-  const [goalInput, setGoalInput] = useState(""); // 목표 입력 상태
-  const [suggestedInput, setSuggestedInput] = useState(""); // 추천 목표 입력 상태
+  const [goalInput, setGoalInput] = useState("");
+  const [suggestedInput, setSuggestedInput] = useState("");
 
   const handleGoalChange = (e) => {
-    setGoalInput(e.target.value); // 목표 입력값 상태 업데이트
+    setGoalInput(e.target.value);
   };
 
   const handleSuggestedChange = (e) => {
-    setSuggestedInput(e.target.value); // 추천 목표 입력값 상태 업데이트
+    setSuggestedInput(e.target.value);
   };
 
   return (
     <Container>
-      <BackContainer>
-        <StyledBackIcon src={backIcon} alt="뒤로가기" />
-        <BackText>Back</BackText>
-      </BackContainer>
+      <BackButton />
       <ContentContainer>
         <GoalContainer>
           <UserContainer>00님의 목표</UserContainer>
@@ -94,27 +90,6 @@ const Container = styled.div`
   padding-bottom: 60px;
 `;
 
-const BackContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 20px;
-  left: 24px;
-  gap: 12px;
-  z-index: 10;
-`;
-
-const StyledBackIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const BackText = styled.span`
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-`;
-
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -137,9 +112,8 @@ const UserContainer = styled.div`
 const Separator = styled.hr`
   margin: 20px 0;
   border: 0;
-  border-top: 1px solid #000; /* 항상 검정색 수평선 */
+  border-top: 1px solid #000;
   width: 100%;
-  color: #6f6f6f;
 `;
 
 const WhatGoal = styled.div`
