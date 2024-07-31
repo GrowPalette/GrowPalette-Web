@@ -1,33 +1,38 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AddGoalIcon from "../assets/images/add_goal.svg"; // 아이콘 이미지 임포트
-import LeftIcon from "../assets/images/left.svg"; // 왼쪽 화살표 아이콘 임포트
-import RightIcon from "../assets/images/right.svg"; // 오른쪽 화살표 아이콘 임포트
-import CheckGoalIcon from "../assets/images/check_goal.svg"; // 체크 아이콘 임포트
-import CheckboxIcon from "../assets/images/checkbox.svg"; // 체크박스 아이콘 임포트
-import FilledCheckboxIcon from "../assets/images/filled_checkbox.svg"; // 체크박스 체크된 아이콘 임포트
+import AddGoalIcon from "../assets/images/add_goal.svg";
+import LeftIcon from "../assets/images/left.svg";
+import RightIcon from "../assets/images/right.svg";
+import CheckGoalIcon from "../assets/images/check_goal.svg";
+import CheckboxIcon from "../assets/images/checkbox.svg";
+import FilledCheckboxIcon from "../assets/images/filled_checkbox.svg";
+import Congrats from "./Congrats"; // Congrats 컴포넌트 임포트
 
 const GoalCreation = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
-  const [checkedGoals, setCheckedGoals] = useState({
-    reading: false,
-    language: false,
-    specs: false,
-    life: false,
-  });
+  const [isCongratsVisible, setCongratsVisible] = useState(false);
+  const [checkedGoals, setCheckedGoals] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
-  // 현재 월을 가져오는 함수
+  const handleGoalClick = (index) => {
+    const newCheckedGoals = [...checkedGoals];
+    newCheckedGoals[index] = !newCheckedGoals[index];
+    setCheckedGoals(newCheckedGoals);
+    setCongratsVisible(true);
+  };
+
+  const handleCloseCongrats = () => {
+    setCongratsVisible(false);
+  };
+
   const getCurrentMonth = () => {
     const date = new Date();
     const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
     return `${month}월`;
-  };
-
-  const handleCheckboxClick = (goal) => {
-    setCheckedGoals((prevState) => ({
-      ...prevState,
-      [goal]: !prevState[goal],
-    }));
   };
 
   return (
@@ -74,36 +79,23 @@ const GoalCreation = () => {
       <NewContainer>
         <GoalText>OO님의 목표</GoalText>
         <CheckIcon src={CheckGoalIcon} alt="check goal icon" />
-        <HorizontalLine />
-        <GoalItem onClick={() => handleCheckboxClick("reading")}>
-          <GoalTextLeft>[독서] 독서 3권 하기</GoalTextLeft>
-          <GoalCheckbox
-            src={checkedGoals.reading ? FilledCheckboxIcon : CheckboxIcon}
-            alt="checkbox icon"
-          />
-        </GoalItem>
-        <GoalItem onClick={() => handleCheckboxClick("language")}>
-          <GoalTextLeft>[어학] 영어 단어 매일 10개 외우기</GoalTextLeft>
-          <GoalCheckbox
-            src={checkedGoals.language ? FilledCheckboxIcon : CheckboxIcon}
-            alt="checkbox icon"
-          />
-        </GoalItem>
-        <GoalItem onClick={() => handleCheckboxClick("specs")}>
-          <GoalTextLeft>[스펙] 대외활동 지원하고 합격하기</GoalTextLeft>
-          <GoalCheckbox
-            src={checkedGoals.specs ? FilledCheckboxIcon : CheckboxIcon}
-            alt="checkbox icon"
-          />
-        </GoalItem>
-        <GoalItem onClick={() => handleCheckboxClick("life")}>
-          <GoalTextLeft>[라이프] 아침 7시 기상하기</GoalTextLeft>
-          <GoalCheckbox
-            src={checkedGoals.life ? FilledCheckboxIcon : CheckboxIcon}
-            alt="checkbox icon"
-          />
-        </GoalItem>
+        <Separator />
+        {[
+          "독서 3권 하기",
+          "영어 단어 매일 10개 외우기",
+          "대외활동 지원하고 합격하기",
+          "아침 7시 기상하기",
+        ].map((goal, index) => (
+          <GoalItem key={index} onClick={() => handleGoalClick(index)}>
+            <GoalText>{goal}</GoalText>
+            <GoalCheckbox
+              src={checkedGoals[index] ? FilledCheckboxIcon : CheckboxIcon}
+              alt="checkbox icon"
+            />
+          </GoalItem>
+        ))}
       </NewContainer>
+      {isCongratsVisible && <Congrats onClose={handleCloseCongrats} />}
     </GoalCreationContainer>
   );
 };
@@ -114,14 +106,14 @@ const GoalCreationContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px;
-  background-color: #ffffff; /* 배경 색상: 흰색 */
-  border-radius: 20px 20px 0px 0px; /* 둥근 모서리 */
+  background-color: #ffffff;
+  border-radius: 20px 20px 0px 0px;
   display: flex;
   flex-direction: column;
-  gap: 32px; /* 요소 간 간격 (확대된 간격) */
+  gap: 32px;
   position: absolute;
-  top: 380px; /* 상단 위치 조정 */
-  box-sizing: border-box; /* 테두리와 패딩을 포함하여 전체 크기 계산 */
+  top: 380px;
+  box-sizing: border-box;
 `;
 
 const Header = styled.div`
@@ -131,13 +123,13 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 16px; /* 텍스트 크기 */
-  color: #000000; /* 텍스트 색상 */
+  font-size: 16px;
+  color: #000000;
 `;
 
 const Icon = styled.img`
-  width: 20px; /* 아이콘 너비 */
-  height: 20px; /* 아이콘 높이 */
+  width: 20px;
+  height: 20px;
 `;
 
 const Tabs = styled.div`
@@ -175,24 +167,24 @@ const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-top: 32px; /* LayoutContainer와 위의 요소들 간의 간격 확대 */
+  margin-top: 32px;
 `;
 
 const Navigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 35px; /* 아이콘과 텍스트 간 간격 */
+  gap: 35px;
 `;
 
 const NavIcon = styled.img`
-  width: 24px; /* 아이콘 너비 */
-  height: 24px; /* 아이콘 높이 */
+  width: 24px;
+  height: 24px;
 `;
 
 const MonthText = styled.span`
-  font-size: 16px; /* 텍스트 크기 */
-  color: #000000; /* 텍스트 색상 */
+  font-size: 16px;
+  color: #000000;
 `;
 
 const Box = styled.div`
@@ -201,11 +193,11 @@ const Box = styled.div`
   padding: 12px 30px;
   gap: 48px;
   border-radius: 3px 0px 0px 0px;
-  border: 0.5px solid #dfdfdf; /* 테두리 색상 및 두께 설정 */
-  box-sizing: border-box; /* 패딩과 테두리를 포함하여 전체 크기 계산 */
+  border: 0.5px solid #dfdfdf;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between; /* 항목 간의 공간 균등 배분 */
-  align-items: center; /* 항목 수직 중앙 정렬 */
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Stat = styled.div`
@@ -215,15 +207,15 @@ const Stat = styled.div`
 `;
 
 const StatTitle = styled.span`
-  font-size: 14px; /* 제목 텍스트 크기 */
-  color: #000000; /* 제목 텍스트 색상 */
-  margin-bottom: 8px; /* 제목과 값 사이의 간격 */
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 8px;
 `;
 
 const StatValue = styled.span`
-  font-size: 16px; /* 값 텍스트 크기 */
-  color: #000000; /* 값 텍스트 색상 */
-  font-weight: bold; /* 값 텍스트 굵기 */
+  font-size: 16px;
+  color: #000000;
+  font-weight: bold;
 `;
 
 const NewContainer = styled.div`
@@ -233,7 +225,7 @@ const NewContainer = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-top: 40px;
-  position: relative; /* 체크 아이콘을 컨테이너 안에 위치시키기 위해 상대 위치 설정 */
+  position: relative;
 `;
 
 const GoalText = styled.span`
@@ -245,33 +237,27 @@ const GoalText = styled.span`
 `;
 
 const CheckIcon = styled.img`
-  width: 19.5px; /* 아이콘 너비 */
-  height: 20px; /* 아이콘 높이 */
-  position: absolute; /* 절대 위치 지정 */
-  top: 2px; /* 상단에서 2px 떨어진 위치 */
-  right: 4px; /* 우측에서 4px 떨어진 위치 */
+  width: 19.5px;
+  height: 20px;
+  position: absolute;
+  top: 2px;
+  right: 4px;
 `;
 
-const HorizontalLine = styled.hr`
+const Separator = styled.hr`
+  width: 342px;
+  height: 0;
   border: 0;
-  height: 1px;
-  background-color: #dfdfdf;
-  margin: 16px 0; /* 위아래 여백 */
+  border-top: 1px solid #dfdfdf;
 `;
 
 const GoalItem = styled.div`
   width: 342px;
   height: 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  //   gap: 202px;
+  justify-content: space-between;
   cursor: pointer;
-`;
-
-const GoalTextLeft = styled.span`
-  font-size: 14px;
-  color: #000000;
 `;
 
 const GoalCheckbox = styled.img`
