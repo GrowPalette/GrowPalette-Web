@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import LogoWhite from "../../assets/images/logo_white.svg"; // 로고 이미지 임포트
 import SearchIcon from "../../assets/images/search.svg"; // 돋보기 아이콘 임포트
+import GoalCreation from "../../components/GoalCreation"; // GoalCreation 컴포넌트 임포트
 
 const GoalMain = () => {
   return (
@@ -26,15 +27,20 @@ const GoalMain = () => {
           </GoalBarWrapper>
         </GoalStatusContainer>
       </GoalBarContainer>
+      <GoalCreation /> {/* GoalCreation 컴포넌트 추가 */}
     </Container>
   );
 };
 
 export default GoalMain;
 
+// 기존 스타일 컴포넌트들
 const Container = styled.div`
   height: 100vh; /* 전체 높이를 채우기 위해 100vh 설정 */
-  background: linear-gradient(180deg, #c7e2dd -0.01%, #ebdcb8 100%);
+  background: linear-gradient(180deg, #c7e2dd 0%, #ebdcb8 100%);
+  background-size: 390px 844px; /* #root의 크기에 맞춰 그라데이션 사이즈 설정 */
+  background-position: top; /* 배경 그라데이션의 위치를 상단으로 조정 */
+  background-repeat: no-repeat; /* 배경이 반복되지 않도록 설정 */
   position: relative; /* 자식 요소를 절대 위치로 설정할 수 있도록 */
 `;
 
@@ -88,7 +94,7 @@ const SearchIconImg = styled.img`
 
 const GoalBarContainer = styled.div`
   width: 342px;
-  height: 124px; /* 높이 조정 */
+  height: auto; /* 높이 자동 조정 */
   position: absolute;
   top: 209px;
   left: 24px;
