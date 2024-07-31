@@ -9,7 +9,12 @@ import FilledCheckboxIcon from "../assets/images/filled_checkbox.svg"; // 체크
 
 const GoalCreation = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
-  const [isChecked, setIsChecked] = useState(false); // 체크 상태 관리
+  const [checkedGoals, setCheckedGoals] = useState({
+    reading: false,
+    language: false,
+    specs: false,
+    life: false,
+  });
 
   // 현재 월을 가져오는 함수
   const getCurrentMonth = () => {
@@ -18,8 +23,11 @@ const GoalCreation = () => {
     return `${month}월`;
   };
 
-  const handleCheckboxClick = () => {
-    setIsChecked(!isChecked); // 체크 상태 토글
+  const handleCheckboxClick = (goal) => {
+    setCheckedGoals((prevState) => ({
+      ...prevState,
+      [goal]: !prevState[goal],
+    }));
   };
 
   return (
@@ -67,10 +75,31 @@ const GoalCreation = () => {
         <GoalText>OO님의 목표</GoalText>
         <CheckIcon src={CheckGoalIcon} alt="check goal icon" />
         <HorizontalLine />
-        <GoalItem onClick={handleCheckboxClick}>
+        <GoalItem onClick={() => handleCheckboxClick("reading")}>
           <GoalTextLeft>[독서] 독서 3권 하기</GoalTextLeft>
           <GoalCheckbox
-            src={isChecked ? FilledCheckboxIcon : CheckboxIcon}
+            src={checkedGoals.reading ? FilledCheckboxIcon : CheckboxIcon}
+            alt="checkbox icon"
+          />
+        </GoalItem>
+        <GoalItem onClick={() => handleCheckboxClick("language")}>
+          <GoalTextLeft>[어학] 영어 단어 매일 10개 외우기</GoalTextLeft>
+          <GoalCheckbox
+            src={checkedGoals.language ? FilledCheckboxIcon : CheckboxIcon}
+            alt="checkbox icon"
+          />
+        </GoalItem>
+        <GoalItem onClick={() => handleCheckboxClick("specs")}>
+          <GoalTextLeft>[스펙] 대외활동 지원하고 합격하기</GoalTextLeft>
+          <GoalCheckbox
+            src={checkedGoals.specs ? FilledCheckboxIcon : CheckboxIcon}
+            alt="checkbox icon"
+          />
+        </GoalItem>
+        <GoalItem onClick={() => handleCheckboxClick("life")}>
+          <GoalTextLeft>[라이프] 아침 7시 기상하기</GoalTextLeft>
+          <GoalCheckbox
+            src={checkedGoals.life ? FilledCheckboxIcon : CheckboxIcon}
             alt="checkbox icon"
           />
         </GoalItem>
@@ -227,26 +256,25 @@ const HorizontalLine = styled.hr`
   border: 0;
   height: 1px;
   background-color: #dfdfdf;
-  margin: 16px 0; /* 선과 위 아래 요소 간의 간격 */
+  margin: 16px 0; /* 위아래 여백 */
 `;
 
 const GoalItem = styled.div`
   width: 342px;
   height: 24px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 10px; /* 패딩 추가 */
-  box-sizing: border-box; /* 패딩을 포함하여 전체 크기 계산 */
-  cursor: pointer; /* 클릭 가능한 요소로 설정 */
+  align-items: center;
+  //   gap: 202px;
+  cursor: pointer;
 `;
 
 const GoalTextLeft = styled.span`
-  font-size: 14px; /* 텍스트 크기 */
-  color: #000000; /* 텍스트 색상 */
+  font-size: 14px;
+  color: #000000;
 `;
 
 const GoalCheckbox = styled.img`
-  width: 24px; /* 아이콘 너비 */
-  height: 24px; /* 아이콘 높이 */
+  width: 24px;
+  height: 24px;
 `;
