@@ -22,8 +22,12 @@ const GoalCreation = () => {
     const newCheckedGoals = [...checkedGoals];
     newCheckedGoals[index] = !newCheckedGoals[index];
     setCheckedGoals(newCheckedGoals);
-    if (!checkedGoals[index]) {
-      setCongratsIndex(index); // 목표가 완료되면 축하 메시지를 표시할 인덱스를 설정
+
+    // 목표가 완료되었을 때만 축하 메시지 표시
+    if (newCheckedGoals[index] && !checkedGoals[index]) {
+      setCongratsIndex(index);
+    } else if (!newCheckedGoals[index] && checkedGoals[index]) {
+      setCongratsIndex(null); // 체크 해제 시 축하 메시지 숨기기
     }
   };
 
@@ -91,10 +95,10 @@ const GoalCreation = () => {
         <CheckIcon src={CheckGoalIcon} alt="check goal icon" />
         <Separator />
         {[
-          "독서 3권 하기",
-          "영어 단어 매일 10개 외우기",
-          "대외활동 지원하고 합격하기",
-          "아침 7시 기상하기",
+          "[독서] 독서 3권 하기",
+          "[어학] 영어 단어 매일 10개 외우기",
+          "[스펙] 대외활동 지원하고 합격하기",
+          "[라이프] 아침 7시 기상하기",
         ].map((goal, index) => (
           <GoalItem key={index} onClick={() => handleGoalClick(index)}>
             <GoalText>{goal}</GoalText>
@@ -108,7 +112,7 @@ const GoalCreation = () => {
       {congratsIndex !== null && (
         <Congrats
           onClose={handleCloseCongrats}
-          goal={
+          goalText={
             [
               "[독서] 독서 3권 하기",
               "[어학] 영어 단어 매일 10개 외우기",
