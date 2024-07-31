@@ -7,7 +7,8 @@ import YearlyView from "../../components/YearlyView";
 
 const EnterGoalTerm = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
-  const [selectedMonth, setSelectedMonth] = useState(null); // 선택된 월 상태 관리
+  const [selectedMonth, setSelectedMonth] = useState(null); // 선택된 월 상태
+  const [selectedYear, setSelectedYear] = useState(null); // 선택된 연도 상태
 
   return (
     <Container>
@@ -49,8 +50,8 @@ const EnterGoalTerm = () => {
         />
       ) : (
         <YearlyView
-          selectedMonth={selectedMonth}
-          setSelectedMonth={setSelectedMonth}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
         />
       )}
       <ApplyButton>적용</ApplyButton>
@@ -60,7 +61,7 @@ const EnterGoalTerm = () => {
 
 export default EnterGoalTerm;
 
-// Styled Components는 그대로 사용
+// ... 나머지 스타일 코드
 
 const Container = styled.div`
   display: flex;
@@ -71,6 +72,8 @@ const Container = styled.div`
   padding-bottom: 60px;
   position: relative;
 `;
+
+// ... 나머지 스타일 코드
 
 const CategoryContainer = styled.div`
   display: flex;

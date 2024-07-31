@@ -2,21 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DropdownIcon from "../assets/images/dropdown.svg"; // 드롭다운 아이콘 임포트
 
-const YearlyView = () => {
+const YearlyView = ({ selectedYear, setSelectedYear }) => {
   const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림 상태 관리
-  const [selectedYear, setSelectedYear] = useState(null); // 선택된 연도 상태 관리
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 드롭다운 열림/닫힘 토글
   };
 
   const handleYearSelect = (year) => {
-    setSelectedYear(selectedYear === year ? null : year); // 선택된 연도로 상태 업데이트
+    setSelectedYear((prev) => (prev === year ? null : year)); // 선택된 연도 토글
   };
 
   return (
     <YearlyViewContainer>
-      <Dropdown onClick={toggleDropdown} isSelected={selectedYear !== null}>
+      <Dropdown
+        onClick={toggleDropdown}
+        isSelected={selectedYear !== null} // 선택된 상태에 따라 색상 변경
+      >
         <DropdownText>
           {selectedYear ? `${selectedYear}년` : "선택"}
         </DropdownText>
@@ -24,12 +26,11 @@ const YearlyView = () => {
       </Dropdown>
       <DropdownContent isOpen={isOpen}>
         {Array.from({ length: 10 }, (_, i) => new Date().getFullYear() + i).map(
-          (year, index) => (
+          (year) => (
             <DropdownItem
               key={year}
               onClick={() => handleYearSelect(year)}
-              isSelected={year === selectedYear}
-              isLastItem={index === 9} // 마지막 항목 여부
+              isSelected={year === selectedYear} // 선택된 항목 강조
             >
               {year}년
             </DropdownItem>
@@ -44,8 +45,8 @@ export default YearlyView;
 
 const YearlyViewContainer = styled.div`
   position: absolute;
-  top: 243px; /* MonthlyView와 동일한 높이로 조정 */
-  right: 24px; /* "연간" 탭의 우측 여백 */
+  top: 243px; /* EditTermContainer와 동일한 높이 */
+  right: 24px; /* 원하는 위치에 배치 */
   width: 102px;
   height: auto; /* 내용에 따라 자동 조정 */
 `;
@@ -56,7 +57,7 @@ const Dropdown = styled.div`
   padding: 8px 16px;
   border-radius: 3px 0 0 0;
   background-color: ${({ isSelected }) =>
-    isSelected ? "#C9BC9C" : "#f5f5f5"}; /* 선택 여부에 따른 배경색 */
+    isSelected ? "#C9BC9C" : "#F5F5F5"}; /* 선택된 상태에 따라 색상 변경 */
   position: relative;
   cursor: pointer;
   display: flex;

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import DropdownIcon from "../assets/images/dropdown.svg"; // 드롭다운 아이콘 임포트
 
-const MonthlyView = () => {
+const MonthlyView = ({ selectedMonth, setSelectedMonth }) => {
   const [isOpen, setIsOpen] = useState(false); // 드롭다운 열림 상태 관리
-  const [selectedMonth, setSelectedMonth] = useState(null); // 선택된 월 상태 관리
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen); // 드롭다운 열림/닫힘 토글
