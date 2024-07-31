@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import BackButton from "../../components/BackButton"; // BackButton 컴포넌트 임포트
+import BackButton from "../../components/BackButton";
 import CalendarIcon from "../../assets/images/Calendar.svg";
+import MonthlyView from "../../components/MonthlyView";
+import YearlyView from "../../components/YearlyView";
 
 const EnterGoalTerm = () => {
-  const [selectedTab, setSelectedTab] = useState("monthly"); // 선택된 탭 상태 관리
+  const [selectedTab, setSelectedTab] = useState("monthly");
+  const [selectedMonth, setSelectedMonth] = useState(null); // 선택된 월 상태 관리
 
   return (
     <Container>
-      <BackButton /> {/* BackButton 컴포넌트 사용 */}
+      <BackButton />
       <CategoryContainer>
         <StyledCategoryIcon src={CalendarIcon} alt="달력 아이콘" />
         <CategoryText>기간</CategoryText>
@@ -39,12 +42,25 @@ const EnterGoalTerm = () => {
           />
         </SeparatorContainer>
       </EditTermContainer>
-      <ApplyButton>적용</ApplyButton> {/* ApplyButton 컴포넌트 사용 */}
+      {selectedTab === "monthly" ? (
+        <MonthlyView
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+        />
+      ) : (
+        <YearlyView
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+        />
+      )}
+      <ApplyButton>적용</ApplyButton>
     </Container>
   );
 };
 
 export default EnterGoalTerm;
+
+// Styled Components는 그대로 사용
 
 const Container = styled.div`
   display: flex;
@@ -53,7 +69,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   padding-bottom: 60px;
-  position: relative; /* 상대적인 위치 지정 */
+  position: relative;
 `;
 
 const CategoryContainer = styled.div`
@@ -79,32 +95,31 @@ const EditTermContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 390px; /* 고정 너비 */
-  height: 42px; /* 고정 높이 */
+  width: 390px;
+  height: 42px;
   position: absolute;
-  top: 179px; /* 절대 위치 지정 */
+  top: 179px;
   gap: 0;
 `;
 
 const TabContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%; /* 전체 너비 */
-  height: 40px; /* 고정 높이 */
+  width: 100%;
+  height: 40px;
   position: relative;
-  margin-bottom: 2px; /* 선과의 간격 조정 */
+  margin-bottom: 2px;
 `;
 
 const Tab = styled.div`
-  font-size: 16px; /* 글자 크기 */
-  color: ${({ isSelected }) =>
-    isSelected ? "#000000" : "#DFDFDF"}; /* 텍스트 색상 */
-  cursor: pointer; /* 커서 모양 변경 */
-  padding: 12px 48px; /* 패딩 */
+  font-size: 16px;
+  color: ${({ isSelected }) => (isSelected ? "#000000" : "#DFDFDF")};
+  cursor: pointer;
+  padding: 12px 48px;
   border-radius: ${({ isSelected }) =>
-    isSelected ? "3px 0 0 3px" : "0 3px 3px 0"}; /* 테두리 반경 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  flex: 1; /* 균등 분할 */
+    isSelected ? "3px 0 0 3px" : "0 3px 3px 0"};
+  text-align: center;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,47 +127,35 @@ const Tab = styled.div`
 
 const SeparatorContainer = styled.div`
   display: flex;
-  width: 390px; /* 고정 너비 */
-  height: 2px; /* 고정 높이 */
+  width: 390px;
+  height: 2px;
   position: relative;
 `;
 
 const EditTermLine = styled.div`
-  width: ${({ position }) =>
-    position === "left" ? "50%" : "50%"}; /* 각 절반 너비 */
-  height: 2px; /* 고정 높이 */
+  width: 50%;
+  height: 2px;
   background-color: ${({ isSelected, position }) =>
-    isSelected
-      ? "#000000"
-      : position === "left"
-      ? "#DFDFDF"
-      : position === "right"
-      ? "#DFDFDF"
-      : "#DFDFDF"}; /* 배경색 */
+    isSelected ? "#000000" : "#DFDFDF"};
   position: absolute;
   top: 0;
-  left: ${({ position }) =>
-    position === "left"
-      ? "0"
-      : position === "right"
-      ? "50%"
-      : "0"}; /* 선택 상태에 따라 위치 조정 */
+  left: ${({ position }) => (position === "left" ? "0" : "50%")};
 `;
 
 const ApplyButton = styled.button`
-  width: 342px; /* 고정 너비 */
-  height: 56px; /* 고정 높이 */
+  width: 342px;
+  height: 56px;
   position: absolute;
-  top: 708px; /* 절대 위치 지정 */
-  left: 24px; /* 절대 위치 지정 */
-  padding: 14px 68px; /* 패딩 */
-  gap: 4px; /* 간격 */
-  border-radius: 3px 0 0 0; /* 테두리 반경 */
-  background-color: #222222; /* 배경색 */
-  color: #ffffff; /* 글자색 */
-  font-size: 16px; /* 글자 크기 */
-  font-weight: bold; /* 글자 두께 */
-  opacity: 1; /* 투명도 */
-  border: none; /* 테두리 없앰 */
-  cursor: pointer; /* 커서 모양 변경 */
+  top: 708px;
+  left: 24px;
+  padding: 14px 68px;
+  gap: 4px;
+  border-radius: 3px 0 0 0;
+  background-color: #222222;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 1;
+  border: none;
+  cursor: pointer;
 `;
