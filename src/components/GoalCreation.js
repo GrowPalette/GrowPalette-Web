@@ -4,15 +4,22 @@ import AddGoalIcon from "../assets/images/add_goal.svg"; // 아이콘 이미지 
 import LeftIcon from "../assets/images/left.svg"; // 왼쪽 화살표 아이콘 임포트
 import RightIcon from "../assets/images/right.svg"; // 오른쪽 화살표 아이콘 임포트
 import CheckGoalIcon from "../assets/images/check_goal.svg"; // 체크 아이콘 임포트
+import CheckboxIcon from "../assets/images/checkbox.svg"; // 체크박스 아이콘 임포트
+import FilledCheckboxIcon from "../assets/images/filled_checkbox.svg"; // 체크박스 체크된 아이콘 임포트
 
 const GoalCreation = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
+  const [isChecked, setIsChecked] = useState(false); // 체크 상태 관리
 
   // 현재 월을 가져오는 함수
   const getCurrentMonth = () => {
     const date = new Date();
     const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더함
     return `${month}월`;
+  };
+
+  const handleCheckboxClick = () => {
+    setIsChecked(!isChecked); // 체크 상태 토글
   };
 
   return (
@@ -59,7 +66,14 @@ const GoalCreation = () => {
       <NewContainer>
         <GoalText>OO님의 목표</GoalText>
         <CheckIcon src={CheckGoalIcon} alt="check goal icon" />
-        <HorizontalLine /> {/* 수평선 추가 */}
+        <HorizontalLine />
+        <GoalItem onClick={handleCheckboxClick}>
+          <GoalTextLeft>[독서] 독서 3권 하기</GoalTextLeft>
+          <GoalCheckbox
+            src={isChecked ? FilledCheckboxIcon : CheckboxIcon}
+            alt="checkbox icon"
+          />
+        </GoalItem>
       </NewContainer>
     </GoalCreationContainer>
   );
@@ -189,7 +203,7 @@ const NewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-top: 40px; /* NewContainer와 위의 LayoutContainer 간의 간격 확대 */
+  margin-top: 40px;
   position: relative; /* 체크 아이콘을 컨테이너 안에 위치시키기 위해 상대 위치 설정 */
 `;
 
@@ -209,9 +223,30 @@ const CheckIcon = styled.img`
   right: 4px; /* 우측에서 4px 떨어진 위치 */
 `;
 
-const HorizontalLine = styled.div`
-  width: 342px; /* NewContainer와 동일한 너비 */
-  height: 1px; /* 선의 두께 */
-  background-color: #dfdfdf; /* 선의 색상 */
-  margin-top: 16px; /* 텍스트와 수평선 사이의 간격 */
+const HorizontalLine = styled.hr`
+  border: 0;
+  height: 1px;
+  background-color: #dfdfdf;
+  margin: 16px 0; /* 선과 위 아래 요소 간의 간격 */
+`;
+
+const GoalItem = styled.div`
+  width: 342px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px; /* 패딩 추가 */
+  box-sizing: border-box; /* 패딩을 포함하여 전체 크기 계산 */
+  cursor: pointer; /* 클릭 가능한 요소로 설정 */
+`;
+
+const GoalTextLeft = styled.span`
+  font-size: 14px; /* 텍스트 크기 */
+  color: #000000; /* 텍스트 색상 */
+`;
+
+const GoalCheckbox = styled.img`
+  width: 24px; /* 아이콘 너비 */
+  height: 24px; /* 아이콘 높이 */
 `;
