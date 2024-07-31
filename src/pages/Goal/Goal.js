@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LogoWhite from "../../assets/images/logo_white.svg"; // 로고 이미지 임포트
 import SearchIcon from "../../assets/images/search.svg"; // 돋보기 아이콘 임포트
 import GoalCreation from "../../components/GoalCreation"; // GoalCreation 컴포넌트 임포트
+import GoalMark from "../../assets/images/goalmark.svg"; // 목표 마크 이미지 임포트
 
 const GoalMain = () => {
   return (
@@ -21,8 +22,10 @@ const GoalMain = () => {
           <GoalLabel>내 목표</GoalLabel>
           <GoalBarWrapper>
             <GoalBar>
-              <GoalProgress />{" "}
-              {/* 목표 진행 상태에 따라 여기에 흰색 또는 회색 영역이 표시됨 */}
+              <GoalProgress />
+              <GoalMarkContainer style={{ left: "82%" }}>
+                <GoalPercentage>90%</GoalPercentage>
+              </GoalMarkContainer>
             </GoalBar>
           </GoalBarWrapper>
         </GoalStatusContainer>
@@ -35,6 +38,7 @@ const GoalMain = () => {
 export default GoalMain;
 
 // 기존 스타일 컴포넌트들
+
 const Container = styled.div`
   height: 100vh; /* 전체 높이를 채우기 위해 100vh 설정 */
   background: linear-gradient(180deg, #c7e2dd 0%, #ebdcb8 100%);
@@ -152,10 +156,30 @@ const GoalBar = styled.div`
 
 const GoalProgress = styled.div`
   height: 100%;
-  background-color: #ffffff; /* 실현된 목표 부분 색상 */
+  background-color: #f5f5f5; /* 실현된 목표 부분 색상 */
   border-radius: 20px; /* 좌측 둥근 모서리 설정 */
+  position: relative;
+  width: 90%; /* 예시로 50% 설정, 실제 목표 진행에 따라 변경 */
+`;
+
+const GoalMarkContainer = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%; /* 예시로 50% 설정, 실제 목표 진행에 따라 변경 */
+  top: 14px; /* 목표 마크가 목표 진행 바의 상단에 위치하도록 설정 */
+  left: calc(
+    50% - 12px
+  ); /* 목표 마크의 위치 조정 (아이콘의 중앙에 텍스트가 위치하도록) */
+  width: 44px; /* 목표 마크 이미지의 너비 */
+  height: 31px; /* 목표 마크 이미지의 높이 */
+  background-image: url(${GoalMark}); /* 목표 마크 이미지를 배경으로 설정 */
+  background-size: cover; /* 배경 이미지 크기를 컨테이너에 맞춤 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const GoalPercentage = styled.div`
+  padding-top: 8px;
+  font-size: 10px; /* 퍼센트 텍스트의 크기 */
+  color: #000000; /* 텍스트 색상 */
+  font-weight: bold;
 `;
