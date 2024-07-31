@@ -1,4 +1,5 @@
 // src/pages/Goal/EnterGoalCategory.js
+//http://localhost:3000/goal_category
 import React, { useState } from "react";
 import styled from "styled-components";
 import backIcon from "../../assets/images/back.svg";
