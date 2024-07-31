@@ -26,7 +26,7 @@ import MyPage from "./pages/MyPage";
 import MyPageEdit from "./pages/MyPage/MyPageEdit";
 import MyPageSettings from "./pages/MyPage/MyPageSettings";
 
-import Goal from "./pages/Goal";
+import Goal from "./pages/Goal/Goal";
 import EnterGoal from "./pages/Goal/EnterGoal";
 import EnterGoalCategory from "./pages/Goal/EnterGoalCategory";
 import EnterGoalTerm from "./pages/Goal/EnterGoalTerm";
