@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddGoalIcon from "../assets/images/add_goal.svg"; // 아이콘 이미지 임포트
 import LeftIcon from "../assets/images/left.svg"; // 왼쪽 화살표 아이콘 임포트
 import RightIcon from "../assets/images/right.svg"; // 오른쪽 화살표 아이콘 임포트
+import CheckGoalIcon from "../assets/images/check_goal.svg"; // 체크 아이콘 임포트
 
 const GoalCreation = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
@@ -55,6 +56,11 @@ const GoalCreation = () => {
           </Stat>
         </Box>
       </LayoutContainer>
+      <NewContainer>
+        <GoalText>OO님의 목표</GoalText>
+        <CheckIcon src={CheckGoalIcon} alt="check goal icon" />
+        <HorizontalLine /> {/* 수평선 추가 */}
+      </NewContainer>
     </GoalCreationContainer>
   );
 };
@@ -175,4 +181,37 @@ const StatValue = styled.span`
   font-size: 16px; /* 값 텍스트 크기 */
   color: #000000; /* 값 텍스트 색상 */
   font-weight: bold; /* 값 텍스트 굵기 */
+`;
+
+const NewContainer = styled.div`
+  width: 342px;
+  height: 212.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 40px; /* NewContainer와 위의 LayoutContainer 간의 간격 확대 */
+  position: relative; /* 체크 아이콘을 컨테이너 안에 위치시키기 위해 상대 위치 설정 */
+`;
+
+const GoalText = styled.span`
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.75px;
+  text-align: left;
+`;
+
+const CheckIcon = styled.img`
+  width: 19.5px; /* 아이콘 너비 */
+  height: 20px; /* 아이콘 높이 */
+  position: absolute; /* 절대 위치 지정 */
+  top: 2px; /* 상단에서 2px 떨어진 위치 */
+  right: 4px; /* 우측에서 4px 떨어진 위치 */
+`;
+
+const HorizontalLine = styled.div`
+  width: 342px; /* NewContainer와 동일한 너비 */
+  height: 1px; /* 선의 두께 */
+  background-color: #dfdfdf; /* 선의 색상 */
+  margin-top: 16px; /* 텍스트와 수평선 사이의 간격 */
 `;
