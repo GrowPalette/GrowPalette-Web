@@ -10,7 +10,7 @@ import Congrats from "./Congrats"; // Congrats 컴포넌트 임포트
 
 const GoalCreation = () => {
   const [selectedTab, setSelectedTab] = useState("monthly");
-  const [isCongratsVisible, setCongratsVisible] = useState(false);
+  const [congratsIndex, setCongratsIndex] = useState(null); // 축하 메시지가 표시될 인덱스
   const [checkedGoals, setCheckedGoals] = useState([
     false,
     false,
@@ -22,11 +22,13 @@ const GoalCreation = () => {
     const newCheckedGoals = [...checkedGoals];
     newCheckedGoals[index] = !newCheckedGoals[index];
     setCheckedGoals(newCheckedGoals);
-    setCongratsVisible(true);
+    if (!checkedGoals[index]) {
+      setCongratsIndex(index); // 목표가 완료되면 축하 메시지를 표시할 인덱스를 설정
+    }
   };
 
   const handleCloseCongrats = () => {
-    setCongratsVisible(false);
+    setCongratsIndex(null); // 축하 메시지 닫기
   };
 
   const getCurrentMonth = () => {
@@ -64,15 +66,23 @@ const GoalCreation = () => {
         <Box>
           <Stat>
             <StatTitle>완료한 목표</StatTitle>
-            <StatValue>n개</StatValue>
+            <StatValue>{checkedGoals.filter(Boolean).length}개</StatValue>
           </Stat>
           <Stat>
             <StatTitle>남은 목표</StatTitle>
-            <StatValue>n개</StatValue>
+            <StatValue>
+              {checkedGoals.length - checkedGoals.filter(Boolean).length}개
+            </StatValue>
           </Stat>
           <Stat>
             <StatTitle>달성률</StatTitle>
-            <StatValue>90%</StatValue>
+            <StatValue>
+              {Math.round(
+                (checkedGoals.filter(Boolean).length / checkedGoals.length) *
+                  100
+              )}
+              %
+            </StatValue>
           </Stat>
         </Box>
       </LayoutContainer>
@@ -95,7 +105,19 @@ const GoalCreation = () => {
           </GoalItem>
         ))}
       </NewContainer>
-      {isCongratsVisible && <Congrats onClose={handleCloseCongrats} />}
+      {congratsIndex !== null && (
+        <Congrats
+          onClose={handleCloseCongrats}
+          goal={
+            [
+              "독서 3권 하기",
+              "영어 단어 매일 10개 외우기",
+              "대외활동 지원하고 합격하기",
+              "아침 7시 기상하기",
+            ][congratsIndex]
+          }
+        />
+      )}
     </GoalCreationContainer>
   );
 };
