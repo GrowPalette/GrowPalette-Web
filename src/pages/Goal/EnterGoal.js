@@ -72,7 +72,7 @@ const EnterGoal = () => {
         </InputContainer>
       </ContentContainer>
       <ButtonContainer>
-        <SaveButton>임시 저장</SaveButton>
+        <SaveButton>취소</SaveButton>
         <UploadButton>업로드</UploadButton>
       </ButtonContainer>
     </Container>
