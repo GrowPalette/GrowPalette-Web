@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import backIcon from "../../assets/images/back.svg";
 import categoryIcon from "../../assets/images/categoryIcon.svg";
-import BottomNavbar from "../../components/BottomNavbar";
+// import BottomNavbar from "../../components/BottomNavbar";
 
 const EnterGoalCategory = () => {
   const [selectedTag, setSelectedTag] = useState(null); // 선택된 태그를 상태로 관리
@@ -40,7 +40,7 @@ const EnterGoalCategory = () => {
         ))}
       </CategoryTagContainer>
 
-      <BottomNavbar />
+      {/* <BottomNavbar /> */}
     </Container>
   );
 };
@@ -59,30 +59,34 @@ const tags = [
 ];
 
 export default EnterGoalCategory;
-
 const Container = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
-  padding-bottom: 60px; // BottomNavbar의 높이 만큼의 여백을 추가
+  padding-bottom: 60px;
 `;
 
 const BackContainer = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 71px;
+  top: 20px;
   left: 24px;
   gap: 12px;
+  z-index: 10;
 `;
 
 const StyledBackIcon = styled.img`
-  width: 72px;
+  width: 24px;
   height: 24px;
 `;
 
 const BackText = styled.span`
   font-size: 16px;
+  font-weight: bold;
+  color: #333;
 `;
 
 const CategoryContainer = styled.div`
