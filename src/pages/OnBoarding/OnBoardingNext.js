@@ -2,15 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const OnBoardingNext = () => {
-    return (
-        <Container>
-
-        </Container>
-    );
+  return <Container></Container>;
 };
 
-export default OnBoardingNext
+export default OnBoardingNext;
 
-const Container = styled.div`
-
-`
+const Container = styled.div``;
