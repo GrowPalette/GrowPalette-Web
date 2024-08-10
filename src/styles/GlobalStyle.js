@@ -81,6 +81,26 @@ const GlobalStyle = createGlobalStyle`
       //background-color: red;
       background-color: white;
       position: relative;
+      overflow: auto; /* 전체 페이지 넘침 방지 */
+    }
+    
+        /* 웹킷 브라우저에서 스크롤바 숨기기 */
+    #root::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    #root::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+
+    #root::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Firefox에서 스크롤바 숨기기 */
+    #root {
+      scrollbar-width: none;
     }
   }
 `;

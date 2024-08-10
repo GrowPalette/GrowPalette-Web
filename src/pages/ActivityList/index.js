@@ -1,12 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SearchBox from "./components/ActivityList/SearchBox";
 import Ment from "./components/ActivityList/Ment";
 import ActivityReportTabContainer from "./components/ActivityList/TabComponents/ActivityReportTabContainer";
 import EnterIcon from "../../../src/assets/images/JaeWoo/ActivityList/EnterIcon.svg";
 
-
 const ActivityList = () => {
+    // useNavigate 훅을 사용하여 navigate 함수 생성
+    const navigate = useNavigate();
+
+    // 클릭 이벤트 핸들러 함수
+    const handleEnterClick = () => {
+        navigate("/enter_activity");
+    };
+
     return (
         <Container>
             <GrowPaletteLogo>
@@ -16,7 +24,7 @@ const ActivityList = () => {
             <MentEnterRow>
                 <Ment>
                 </Ment>
-                <Enter>
+                <Enter onClick={handleEnterClick}>
                     <img src={EnterIcon} alt="EnterLogo" />
                 </Enter>
             </MentEnterRow>
@@ -25,7 +33,7 @@ const ActivityList = () => {
     );
 };
 
-export default ActivityList
+export default ActivityList;
 
 const Container = styled.div`
     display: flex;
@@ -54,4 +62,5 @@ const MentEnterRow = styled.div`
 const Enter = styled.div`
     width: 1.25rem;
     height: 1.25rem;
+    cursor: pointer; /* 클릭할 수 있음을 나타냄 */
 `
