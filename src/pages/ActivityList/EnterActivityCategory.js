@@ -4,7 +4,7 @@ import styled from "styled-components";
 const EnterActivityCategory = () => {
     return (
         <Container>
-
+            
         </Container>
     );
 };
