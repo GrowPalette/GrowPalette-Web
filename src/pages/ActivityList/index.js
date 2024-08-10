@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SearchBox from "./components/ActivityList/SearchBox";
 import Ment from "./components/ActivityList/Ment";
-import ActivityReportTabContainer from "./components/ActivityList/ActivityReportContainer";
+import ActivityReportTabContainer from "./components/ActivityList/TabComponents/ActivityReportTabContainer";
 import EnterIcon from "../../../src/assets/images/JaeWoo/ActivityList/EnterIcon.svg";
 
 
