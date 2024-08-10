@@ -29,6 +29,10 @@ const EnterActivity = () => {
         navigate(-1); // 이전 페이지로 이동
     };
 
+    const handleAddTagClick = () => {
+        navigate('/enter_activity_tag'); // /enter_activity_term로 이동
+    };
+
     const handleAddTermClick = () => {
         navigate('/enter_activity_term'); // /enter_activity_term로 이동
     };
@@ -86,7 +90,11 @@ const EnterActivity = () => {
 
                     <TagContainer>
                         <Subtitle>
-                            <img src={TagIcon} alt="태그 아이콘"/>
+                            <TagRowContainer>
+                                <img src={TagIcon} alt="태그 아이콘"/>
+                                <TermButton src={AddCategoryButton} alt="태그 추가버튼" onClick={handleAddTagClick}/>
+                            </TagRowContainer>
+
                             <Input placeholder="키워드를 선택해주세요" />
                         </Subtitle>
                     </TagContainer>
@@ -224,6 +232,13 @@ const Input = styled.input`
 const TitleContainer = styled.div``;
 
 const TagContainer = styled.div``;
+
+const TagRowContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 중앙 정렬 */
+    width: 100%;
+`;
 
 const TermContainer = styled.div`
     display: flex;

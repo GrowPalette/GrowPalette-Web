@@ -15,6 +15,7 @@ import OnBoardingSuccess from './pages/OnBoarding/OnBoardingSuccess';
 import ActivityList from './pages/ActivityList';
 import EnterActivity from './pages/ActivityList/EnterActivity';
 import EnterActivityCategory from './pages/ActivityList/EnterActivityCategory';
+import EnterActivityTag from './pages/ActivityList/EnterActivityTag';
 import EnterActivityDetail from './pages/ActivityList/EnterActivityDetail';
 import EnterActivityTerm from './pages/ActivityList/EnterActivityTerm';
 
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/activity_list" element={<ActivityList />} />
                     <Route path="/enter_activity" element={<EnterActivity />} />
                     <Route path="/enter_activity_detail" element={<EnterActivityDetail />} /> {/* 얘는 id값으로 받아야할 것 같음*/}
+                    <Route path="/enter_activity_tag" element={<EnterActivityTag />} />
                     <Route path="/enter_activity_category" element={<EnterActivityCategory />} />
                     <Route path="/enter_activity_term" element={<EnterActivityTerm />} />
                     <Route path="/activity_detail" element={<ActivityDetail />} />

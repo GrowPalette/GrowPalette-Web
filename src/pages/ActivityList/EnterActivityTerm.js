@@ -109,7 +109,7 @@ const EnterActivityTerm = () => {
                             day ? (
                                 <DateBox
                                     key={index}
-                                    isSelected={day === selectedDate.getDate()}
+                                    selected={day === selectedDate.getDate()}
                                     onClick={() => handleDateClick(new Date(selectedDate.getFullYear(), selectedDate.getMonth(), day))}
                                 >
                                     {day}
@@ -121,10 +121,10 @@ const EnterActivityTerm = () => {
                     </Dates>
                 </Calendar>
 
-                <ApplyButton onClick={handleApplyClick}>
-                    적용
-                </ApplyButton>
             </LargeContainer>
+            <ApplyButton onClick={handleApplyClick}>
+                적용
+            </ApplyButton>
         </Container>
     );
 };
@@ -133,7 +133,8 @@ export default EnterActivityTerm;
 
 const Container = styled.div`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const LargeContainer = styled.div`
@@ -239,8 +240,8 @@ const DateBox = styled.div`
     height: 1.5rem;
     justify-content: center;
     align-items: center;
-    color: ${props => props.isSelected ? '#FFF' : '#000'};
-    background-color: ${props => props.isSelected ? 'var(--Blue-500, #9FC7C0)' : 'transparent'};
+    color: ${props => props.selected ? '#FFF' : '#000'};
+    background-color: ${props => props.selected ? 'var(--Blue-500, #9FC7C0)' : 'transparent'};
     text-align: center;
     font-family: Roboto;
     font-size: 0.875rem;
@@ -273,6 +274,6 @@ const ApplyButton = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 65%;
+    margin-top: 70%;
     cursor: pointer; /* 클릭 가능한 커서 */
 `

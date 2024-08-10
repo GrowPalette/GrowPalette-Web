@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BackButtonImg from "../../assets/images/JaeWoo/ActivityList/뒤로가기버튼.svg";
-import CategoryIcon from "../../assets/images/JaeWoo/ActivityList/CategoryIcon.svg";
+import TagIcon from "../../assets/images/JaeWoo/ActivityList/TagIcon.svg";
 
-const EnterActivityCategory = () => {
-    const navigate = useNavigate(); // useNavigate 훅 사용
-    const [selectedCategories, setSelectedCategories] = useState([]);
+const EnterActivityTag = () => {
+    const navigate = useNavigate(); // useNavigate hook
+    const [selectedTags, setSelectedTags] = useState([]);
 
-    const categories = ["동아리", "스터디", "대외활동", "어학", "전공", "취미", "기타", "시험", "공모전", "자격증"];
+    const tags = ["IT", "기획", "마케팅", "코딩", "HR", "교육", "기타", "영업", "경영"];
 
     const handleBackButtonClick = () => {
-        navigate(-1); // 이전 페이지로 이동
+        navigate(-1); // Navigate to the previous page
     };
 
-    const handleCategoryClick = (category) => {
-        if (selectedCategories.includes(category)) {
-            setSelectedCategories(selectedCategories.filter(c => c !== category));
+    const handleTagClick = (tag) => {
+        if (selectedTags.includes(tag)) {
+            setSelectedTags(selectedTags.filter(t => t !== tag));
         } else {
-            setSelectedCategories([...selectedCategories, category]);
+            setSelectedTags([...selectedTags, tag]);
         }
     };
 
@@ -29,36 +29,35 @@ const EnterActivityCategory = () => {
     return (
         <Container>
             <LargeContainer>
-
                 <BackButton onClick={handleBackButtonClick}>
-                    <img src={BackButtonImg} alt="뒤로가기 버튼"/>
+                    <img src={BackButtonImg} alt="뒤로가기 버튼" />
                 </BackButton>
 
-                <CategoryContainer>
-                    <img src={CategoryIcon} alt="카테고리 아이콘"/>
-                </CategoryContainer>
+                <TagContainer>
+                    <img src={TagIcon} alt="태그 아이콘" />
+                </TagContainer>
 
-                <CategoriesContainer>
-                    {categories.map((category, index) => (
-                        <CategoryBox
+                <TagsContainer>
+                    {tags.map((tag, index) => (
+                        <TagBox
                             key={index}
-                            selected={selectedCategories.includes(category)}
-                            onClick={() => handleCategoryClick(category)}
+                            selected={selectedTags.includes(tag)}
+                            onClick={() => handleTagClick(tag)}
                         >
-                            {category}
-                        </CategoryBox>
+                            {tag}
+                        </TagBox>
                     ))}
-                </CategoriesContainer>
+                </TagsContainer>
 
             </LargeContainer>
             <ApplyButton onClick={handleApplyClick}>
-                    적용
+                적용
             </ApplyButton>
         </Container>
     );
 };
 
-export default EnterActivityCategory;
+export default EnterActivityTag;
 
 const Container = styled.div`
     display: flex;
@@ -78,23 +77,23 @@ const BackButton = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    cursor: pointer; /* 클릭 가능한 커서 */
+    cursor: pointer;
 `;
 
-const CategoryContainer = styled.div`
+const TagContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center; /* 중앙 정렬 */
+    align-items: center;
 `;
 
-const CategoriesContainer = styled.div`
+const TagsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 1rem;
 `;
 
-const CategoryBox = styled.div`
+const TagBox = styled.div`
     display: flex;
     padding: 0.5rem 1.5rem;
     justify-content: center;
@@ -128,7 +127,6 @@ const ApplyButton = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 65%;
-    cursor: pointer; /* 클릭 가능한 커서 */
     margin-top: 115%;
+    cursor: pointer; /* 클릭 가능한 커서 */
 `
