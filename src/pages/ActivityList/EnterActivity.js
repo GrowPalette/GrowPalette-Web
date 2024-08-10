@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackButtonImg from "../../assets/images/JaeWoo/ActivityList/뒤로가기버튼.svg";
 import TitleIcon from "../../assets/images/JaeWoo/ActivityList/TitleIcon.svg";
@@ -8,17 +9,14 @@ import CategoryIcon from "../../assets/images/JaeWoo/ActivityList/CategoryIcon.s
 import SummarizeIcon from "../../assets/images/JaeWoo/ActivityList/SummerizeIcon.svg";
 import AddTermButton from "../../assets/images/JaeWoo/ActivityList/기간추가버튼.svg";
 import AddCategoryButton from "../../assets/images/JaeWoo/ActivityList/카테고리추가버튼.svg";
-
 import DetailWriteIcon from "../../assets/images/JaeWoo/ActivityList/세부기록작성.svg";
 import DetailWriteButton from "../../assets/images/JaeWoo/ActivityList/세부기록작성버튼.svg";
 import GrowthIcon from "../../assets/images/JaeWoo/ActivityList/성장일지작성.svg";
 import GrowthButton from "../../assets/images/JaeWoo/ActivityList/성장일지작성버튼.svg";
 
-
-
-
 const EnterActivity = () => {
     const [image, setImage] = useState(null);
+    const navigate = useNavigate(); // useNavigate 훅 사용
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -27,11 +25,38 @@ const EnterActivity = () => {
         }
     };
 
+    const handleBackButtonClick = () => {
+        navigate(-1); // 이전 페이지로 이동
+    };
+
+    const handleAddTermClick = () => {
+        navigate('/enter_activity_term'); // /enter_activity_term로 이동
+    };
+
+    const handleAddCategoryClick = () => {
+        navigate('/enter_activity_category'); // /enter_activity_category로 이동
+    };
+
+    const handleDetailWriteClick = () => {
+        navigate('/enter_activity_detail'); // /enter_activity_detail로 이동
+    };
+
+    const handleGrowthClick = () => {
+        navigate('/growth_ai'); // /growth_ai로 이동
+    };
+
+    const handleCancelButtonClick = () => {
+        navigate(-1); // 이전 페이지로 이동
+    };
+
+    const handleUploadButtonClick = () => {
+        navigate('/activity_list'); // /activity_list로 이동
+    };
+
     return (
         <Container>
             <LargeContainer>
-
-                <BackButton>
+                <BackButton onClick={handleBackButtonClick}>
                     <img src={BackButtonImg} alt="뒤로가기 버튼"/>
                 </BackButton>
 
@@ -68,12 +93,12 @@ const EnterActivity = () => {
 
                     <TermContainer>
                         <img src={TermIcon} alt="기간 아이콘"/>
-                        <img src={AddTermButton} alt="기간 추가버튼"/>
+                        <TermButton src={AddTermButton} alt="기간 추가버튼" onClick={handleAddTermClick}/>
                     </TermContainer>
 
                     <CategoryContainer>
                         <img src={CategoryIcon} alt="카테고리 아이콘"/>
-                        <img src={AddCategoryButton} alt="카테고리 추가버튼"/>
+                        <CategoryButton src={AddCategoryButton} alt="카테고리 추가버튼" onClick={handleAddCategoryClick}/>
                     </CategoryContainer>
 
                     <SummarizeContainer>
@@ -85,23 +110,22 @@ const EnterActivity = () => {
 
                     <DetailWriteContainer>
                         <img src={DetailWriteIcon} alt="세부기록 작성 아이콘"/>
-                        <img src={DetailWriteButton} alt="세부기록 작성하러가기 버튼"/>
+                        <DetailWriteButtonStyled src={DetailWriteButton} alt="세부기록 작성하러가기 버튼" onClick={handleDetailWriteClick}/>
                     </DetailWriteContainer>
 
                     <GrowthContainer>
                         <img src={GrowthIcon} alt="성장일지 작성 아이콘"/>
-                        <img src={GrowthButton} alt="성장일지 작성하러가기 버튼"/>
+                        <GrowthButtonStyled src={GrowthButton} alt="성장일지 작성하러가기 버튼" onClick={handleGrowthClick}/>
                     </GrowthContainer>                
                 </ColumnContainer>
 
                 <ButtonContainerRow>
-                    <CancelButton>
+                    <CancelButton onClick={handleCancelButtonClick}>
                         취소
                     </CancelButton>
-                    <UploadButton>
+                    <UploadButton onClick={handleUploadButtonClick}>
                         업로드
                     </UploadButton>
-
                 </ButtonContainerRow>
             </LargeContainer>
         </Container>
@@ -112,7 +136,7 @@ export default EnterActivity;
 
 const Container = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: center
 `;
 
 const LargeContainer = styled.div`
@@ -124,6 +148,7 @@ const BackButton = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
+    cursor: pointer; /* 클릭 가능한 커서 */
 `;
 
 const ImageInsertColumn = styled.div`
@@ -137,6 +162,7 @@ const ImageInsertColumn = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-top: 1rem;
 `;
 
 const ImageBox = styled.div`
@@ -195,23 +221,39 @@ const Input = styled.input`
     }
 `;
 
-const TitleContainer = styled.div`
+const TitleContainer = styled.div``;
 
-`;
-
-const TagContainer = styled.div`
-
-`;
+const TagContainer = styled.div``;
 
 const TermContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center; /* 중앙 정렬 */
+`;
+
+const TermButton = styled.img`
+    cursor: pointer; /* 클릭 가능한 커서 */
+    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
+    
+    &:hover {
+        opacity: 0.7; /* hover 시 투명도 변경 */
+    }
 `;
 
 const CategoryContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    align-items: center; /* 중앙 정렬 */
+`;
+
+const CategoryButton = styled.img`
+    cursor: pointer; /* 클릭 가능한 커서 */
+    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
+    
+    &:hover {
+        opacity: 0.7; /* hover 시 투명도 변경 */
+    }
 `;
 
 const SummarizeContainer = styled.div`
@@ -221,12 +263,32 @@ const SummarizeContainer = styled.div`
 const DetailWriteContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center; /* 중앙 정렬 */
+`;
+
+const DetailWriteButtonStyled = styled.img`
+    cursor: pointer; /* 클릭 가능한 커서 */
+    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
+    
+    &:hover {
+        opacity: 0.7; /* hover 시 투명도 변경 */
+    }
 `;
 
 const GrowthContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    align-items: center; /* 중앙 정렬 */
+`;
+
+const GrowthButtonStyled = styled.img`
+    cursor: pointer; /* 클릭 가능한 커서 */
+    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
+    
+    &:hover {
+        opacity: 0.7; /* hover 시 투명도 변경 */
+    }
 `;
 
 const ColumnContainer = styled.div`
@@ -235,13 +297,13 @@ const ColumnContainer = styled.div`
     gap: 1.2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
-`
+`;
 
 const ButtonContainerRow = styled.div`
     display: flex;
     margin-bottom: 2rem;
     justify-content: space-between;
-`
+`;
 
 const CancelButton = styled.div`
     display: flex;
@@ -260,7 +322,8 @@ const CancelButton = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-`
+    cursor: pointer; /* 클릭 가능한 커서 */
+`;
 
 const UploadButton = styled.div`
     display: flex;
@@ -279,5 +342,5 @@ const UploadButton = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-`
-
+    cursor: pointer; /* 클릭 가능한 커서 */
+`;

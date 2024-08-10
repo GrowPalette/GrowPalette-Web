@@ -60,7 +60,7 @@ function App() {
                     {/* ActivityList */}
                     <Route path="/activity_list" element={<ActivityList />} />
                     <Route path="/enter_activity" element={<EnterActivity />} />
-                    <Route path="/activity_detail/:id" element={<EnterActivityDetail />} />
+                    <Route path="/activity_detail" element={<EnterActivityDetail />} /> {/* 얘는 id값으로 받아야할 것 같음*/}
                     <Route path="/activity_category" element={<EnterActivityCategory />} />
                     <Route path="/activity_term" element={<EnterActivityTerm />} />
                     <Route path="/activity_detail" element={<ActivityDetail />} />
