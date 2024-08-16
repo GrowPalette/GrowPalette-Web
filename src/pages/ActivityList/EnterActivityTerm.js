@@ -1,3 +1,5 @@
+/* /enter_activity_term */
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; // useNavigate 임포트

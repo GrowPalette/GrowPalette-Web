@@ -1,3 +1,5 @@
+/* /enter_activity_detail */
+
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -209,7 +211,8 @@ const FormatIconStrike = styled.img`
 
 const TypingField = styled.div`
     width: 100%;
-    min-height: 32rem;
+    min-height: 32rem; /* 고정 높이 */
+    max-height: 32rem; /* 최대 높이 설정 */
     color: var(--Black, #000);
     font-family: Roboto;
     font-size: 0.875rem;
@@ -220,6 +223,7 @@ const TypingField = styled.div`
     border-radius: 0.25rem;
     padding: 0.5rem;
     resize: vertical;
+    overflow-y: auto; /* 수직 스크롤 추가 */
 
     ::placeholder {
         color: var(--Gray-400, #999);
