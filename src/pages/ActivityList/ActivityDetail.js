@@ -1,144 +1,91 @@
 /* /activity_detail */
 
-/* /enter_activity */
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackButtonImg from "../../assets/images/JaeWoo/ActivityList/뒤로가기버튼.svg";
-import TitleIcon from "../../assets/images/JaeWoo/ActivityList/TitleIcon.svg";
-import TagIcon from "../../assets/images/JaeWoo/ActivityList/TagIcon.svg";
-import TermIcon from "../../assets/images/JaeWoo/ActivityList/TermIcon.svg";
-import CategoryIcon from "../../assets/images/JaeWoo/ActivityList/CategoryIcon.svg";
-import SummarizeIcon from "../../assets/images/JaeWoo/ActivityList/SummerizeIcon.svg";
-import AddTermButton from "../../assets/images/JaeWoo/ActivityList/기간추가버튼.svg";
-import AddCategoryButton from "../../assets/images/JaeWoo/ActivityList/카테고리추가버튼.svg";
-import DetailWriteIcon from "../../assets/images/JaeWoo/ActivityList/세부기록작성.svg";
-import DetailWriteButton from "../../assets/images/JaeWoo/ActivityList/세부기록작성버튼.svg";
-import GrowthIcon from "../../assets/images/JaeWoo/ActivityList/성장일지작성.svg";
-import GrowthButton from "../../assets/images/JaeWoo/ActivityList/성장일지작성버튼.svg";
+
+import DeleteIcon from "../../assets/images/JaeWoo/ActivityList/활동삭제버튼.svg";
+import EditIcon from "../../assets/images/JaeWoo/ActivityList/활동상세제목수정.svg";
+import RightArrowIcon from "../../assets/images/JaeWoo/ActivityList/RightArrow.svg";
+
+import BookIcon from "../../assets/images/JaeWoo/ActivityList/책아이콘.svg";
+import CalendarIcon from "../../assets/images/JaeWoo/ActivityList/달력아이콘.svg";
+import GlassesIcon from "../../assets/images/JaeWoo/ActivityList/안경아이콘.svg";
 
 const ActivityDetail = () => {
-    const [image, setImage] = useState(null);
     const navigate = useNavigate(); // useNavigate 훅 사용
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setImage(URL.createObjectURL(file));
-        }
-    };
 
     const handleBackButtonClick = () => {
         navigate(-1); // 이전 페이지로 이동
     };
 
-    const handleAddTagClick = () => {
-        navigate('/enter_activity_tag'); // /enter_activity_term로 이동
-    };
-
-    const handleAddTermClick = () => {
-        navigate('/enter_activity_term'); // /enter_activity_term로 이동
-    };
-
-    const handleAddCategoryClick = () => {
-        navigate('/enter_activity_category'); // /enter_activity_category로 이동
-    };
-
-    const handleDetailWriteClick = () => {
-        navigate('/enter_activity_detail'); // /enter_activity_detail로 이동
-    };
-
-    const handleGrowthClick = () => {
-        navigate('/growth_ai'); // /growth_ai로 이동
-    };
-
-    const handleCancelButtonClick = () => {
-        navigate(-1); // 이전 페이지로 이동
-    };
-
-    const handleUploadButtonClick = () => {
-        navigate('/activity_list'); // /activity_list로 이동
-    };
-
     return (
         <Container>
             <LargeContainer>
-                <BackButton onClick={handleBackButtonClick}>
-                    <img src={BackButtonImg} alt="뒤로가기 버튼"/>
-                </BackButton>
 
-                <ImageInsertColumn>
-                    <ImageBox>
-                        {image && <img src={image} alt="선택된 이미지" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />}
-                    </ImageBox>
-                    <InsertButton onClick={() => document.getElementById('fileInput').click()}>
-                        사진 변경
-                    </InsertButton>
-                    <input
-                        id="fileInput"
-                        type="file"
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        onChange={handleImageChange}
-                    />
-                </ImageInsertColumn>
+                <HeaderButtonContainerRow>
+                    <BackButton onClick={handleBackButtonClick}>
+                        <img src={BackButtonImg} alt="뒤로가기 버튼"/>
+                    </BackButton>
+
+                    <DeleteButton>
+                        <img src={DeleteIcon} alt="활동삭제버튼"/>
+                    </DeleteButton>
+                </HeaderButtonContainerRow>
+
+                <ImageBox>
+
+                </ImageBox>
                 
                 <ColumnContainer>
-                    <TitleContainer>
-                        <Subtitle>
-                            <img src={TitleIcon} alt="제목 아이콘"/>
-                            <Input placeholder="활동 제목을 입력해주세요" />
-                        </Subtitle>
-                    </TitleContainer>
+                    <TitleRow>
+                        <TitleContainer>
+                            활동제목 들어가는 곳
+                        </TitleContainer>
+                        <EditButton>
+                            <img src={EditIcon} alt="수정버튼"/>
+                        </EditButton>
+                    </TitleRow>
 
                     <TagContainer>
-                        <Subtitle>
-                            <TagRowContainer>
-                                <img src={TagIcon} alt="태그 아이콘"/>
-                                <TermButton src={AddCategoryButton} alt="태그 추가버튼" onClick={handleAddTagClick}/>
-                            </TagRowContainer>
-
-                            <Input placeholder="키워드를 선택해주세요" />
-                        </Subtitle>
+                        태그 들어가는 곳
                     </TagContainer>
 
-                    <TermContainer>
-                        <img src={TermIcon} alt="기간 아이콘"/>
-                        <TermButton src={AddTermButton} alt="기간 추가버튼" onClick={handleAddTermClick}/>
-                    </TermContainer>
-
-                    <CategoryContainer>
-                        <img src={CategoryIcon} alt="카테고리 아이콘"/>
-                        <CategoryButton src={AddCategoryButton} alt="카테고리 추가버튼" onClick={handleAddCategoryClick}/>
-                    </CategoryContainer>
-
                     <SummarizeContainer>
-                        <Subtitle>
-                            <img src={SummarizeIcon} alt="활동 한줄 요약 아이콘"/>
-                            <Input placeholder="활동을 한줄로 요약해주세요" />
-                        </Subtitle>
+                        5월을 알차게 보냈다 (활동한줄 요약 들어가는곳)
                     </SummarizeContainer>
 
-                    <DetailWriteContainer>
-                        <img src={DetailWriteIcon} alt="세부기록 작성 아이콘"/>
-                        <DetailWriteButtonStyled src={DetailWriteButton} alt="세부기록 작성하러가기 버튼" onClick={handleDetailWriteClick}/>
-                    </DetailWriteContainer>
+                    <DetailRecordContainerColumn>
+                        <TitleContainer>
+                            세부기록
+                        </TitleContainer>
 
-                    <GrowthContainer>
-                        <img src={GrowthIcon} alt="성장일지 작성 아이콘"/>
-                        <GrowthButtonStyled src={GrowthButton} alt="성장일지 작성하러가기 버튼" onClick={handleGrowthClick}/>
-                    </GrowthContainer>                
+                        <MultipleDetailRecordColumn>
+
+                            <DetailRecordContainerRow>
+                                <DetailRecordIcon><img src={BookIcon} alt="책 아이콘"/></DetailRecordIcon>
+                                <DetailRecordTitleDateColumn>
+                                    <DetailRecordTitle>5월 스터디 아카이빙(세부기록 제목)</DetailRecordTitle>
+                                    <DetailRecordDate>2024-06-01</DetailRecordDate>
+                                </DetailRecordTitleDateColumn>
+                            </DetailRecordContainerRow>
+
+                            <DetailRecordContainerRow>
+
+                            </DetailRecordContainerRow>
+
+                        </MultipleDetailRecordColumn>
+                    </DetailRecordContainerColumn>
+
+                    <TitleRow>
+                        <TitleContainer>성장일지 보기</TitleContainer>
+                        <GoGrowthButton><img src={RightArrowIcon} alt="오른쪽 버튼"/></GoGrowthButton>
+                    </TitleRow>
+
+
                 </ColumnContainer>
 
-                <ButtonContainerRow>
-                    <CancelButton onClick={handleCancelButtonClick}>
-                        취소
-                    </CancelButton>
-                    <UploadButton onClick={handleUploadButtonClick}>
-                        업로드
-                    </UploadButton>
-                </ButtonContainerRow>
             </LargeContainer>
         </Container>
     );
@@ -156,6 +103,13 @@ const LargeContainer = styled.div`
     padding-top: 1.5rem;
 `;
 
+const HeaderButtonContainerRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+`
+
 const BackButton = styled.div`
     display: inline-flex;
     align-items: center;
@@ -163,19 +117,10 @@ const BackButton = styled.div`
     cursor: pointer; /* 클릭 가능한 커서 */
 `;
 
-const ImageInsertColumn = styled.div`
-    width: 21.375rem;
-    height: 21.375rem;
-    flex-shrink: 0;
-    border-radius: 0.1875rem;
-    background: var(--Gray-100, #F5F5F5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: 1rem;
-`;
+const DeleteButton = styled.div`
+    width: 1.5rem;
+    height: 1.5rem;
+`
 
 const ImageBox = styled.div`
     width: 21.375rem;
@@ -187,127 +132,21 @@ const ImageBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-const InsertButton = styled.div`
-    display: flex;
-    width: 21.375rem;
-    height: 2.9375rem;
-    padding: 0.875rem 0rem;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    border-radius: 0rem 0rem 0.1875rem 0.1875rem;
-    background: rgba(238, 238, 238, 0.50);
-    position: absolute;
-    bottom: 0;
-    cursor: pointer;
-`;
-
-const Subtitle = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* 왼쪽 정렬 */
-    width: 100%;
-    margin-bottom: 1rem;
-    position: relative;
-    gap: 1rem;
-`;
-
-const Input = styled.input`
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid var(--Gray-200, #DFDFDF); /* 회색 줄 */
-    background: none;
-    padding: 0.5rem 0;
-    font-family: Roboto;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    color: #000; /* 입력할 때 텍스트 색상 */
-    
-    &:focus {
-        outline: none; /* 포커스 시 아웃라인 제거 */
-        border-bottom: 1px solid #000; /* 포커스 시 밑줄 색상 */
-    }
-`;
-
-const TitleContainer = styled.div``;
-
-const TagContainer = styled.div``;
-
-const TagRowContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* 중앙 정렬 */
-    width: 100%;
-`;
-
-const TermContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* 중앙 정렬 */
-`;
-
-const TermButton = styled.img`
-    cursor: pointer; /* 클릭 가능한 커서 */
-    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
-    
-    &:hover {
-        opacity: 0.7; /* hover 시 투명도 변경 */
-    }
-`;
-
-const CategoryContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
     margin-top: 1rem;
-    align-items: center; /* 중앙 정렬 */
 `;
 
-const CategoryButton = styled.img`
-    cursor: pointer; /* 클릭 가능한 커서 */
-    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
-    
-    &:hover {
-        opacity: 0.7; /* hover 시 투명도 변경 */
-    }
+const TitleContainer = styled.div`
+    color: var(--Black, #000);
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 `;
 
 const SummarizeContainer = styled.div`
     margin-top: 1rem;
-`;
-
-const DetailWriteContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* 중앙 정렬 */
-`;
-
-const DetailWriteButtonStyled = styled.img`
-    cursor: pointer; /* 클릭 가능한 커서 */
-    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
-    
-    &:hover {
-        opacity: 0.7; /* hover 시 투명도 변경 */
-    }
-`;
-
-const GrowthContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-    align-items: center; /* 중앙 정렬 */
-`;
-
-const GrowthButtonStyled = styled.img`
-    cursor: pointer; /* 클릭 가능한 커서 */
-    transition: opacity 0.3s; /* 애니메이션 효과 추가 */
-    
-    &:hover {
-        opacity: 0.7; /* hover 시 투명도 변경 */
-    }
+    background-color: skyblue;
 `;
 
 const ColumnContainer = styled.div`
@@ -318,48 +157,83 @@ const ColumnContainer = styled.div`
     margin-bottom: 2rem;
 `;
 
-const ButtonContainerRow = styled.div`
+const TitleRow = styled.div`
     display: flex;
-    margin-bottom: 2rem;
+    flex-direction: row;
     justify-content: space-between;
-`;
+`
 
-const CancelButton = styled.div`
+const EditButton = styled.div`
+    width: 1.5rem;
+    height: 1.5rem;
+`
+
+const TagContainer = styled.div`
+    height: 4rem;
+    background-color: grey;
+`
+
+const DetailRecordContainerColumn = styled.div`
     display: flex;
-    width: 10.375rem;
-    height: 2.9375rem;
-    padding: 0.875rem;
-    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+`
+
+const MultipleDetailRecordColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`
+
+const DetailRecordContainerRow = styled.div`
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.7rem;
+
+    width: 21.375rem;
+    height: 5.875rem;
     flex-shrink: 0;
     border-radius: 0.1875rem;
-    border: 0.5px solid var(--Gray-900, #222);
-    color: var(--Gray-900, #222);
+    border: 1px solid var(--Gray-200, #DFDFDF);
+
+    padding-left: 1rem;
+`
+
+const DetailRecordIcon = styled.div`
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+`
+
+const DetailRecordTitleDateColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.7rem;
+`
+
+const DetailRecordTitle = styled.div`
+    color: var(--Black, #000);
     font-family: Roboto;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    cursor: pointer; /* 클릭 가능한 커서 */
-`;
+`
 
-const UploadButton = styled.div`
-    display: flex;
-    width: 10.375rem;
-    height: 2.9375rem;
-    padding: 0.875rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    flex-shrink: 0;
-    border-radius: 0.1875rem;
-    background: var(--Gray-900, #222);
-    color: var(--White, #FFF);
+const DetailRecordDate = styled.div`
+    color: var(--Gray-700, #6F6F6F);
     font-family: Roboto;
-    font-size: 1rem;
+    font-size: 0.75rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    cursor: pointer; /* 클릭 가능한 커서 */
-`;
+`
+
+const GoGrowthButton = styled.div`
+    width: 1.5rem;
+    height: 1.5rem;
+`
