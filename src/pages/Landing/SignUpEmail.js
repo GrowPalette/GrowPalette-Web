@@ -4,7 +4,7 @@ import backIcon from "../../assets/images/Back.svg";
 import JoinIcon from "../../assets/images/Join.svg";
 import lineIcon from "../../assets/images/Ing1.svg";
 
-const SignUp = () => {
+const SignUpEmail = () => {
   return (
     <Container>
       <Header>
@@ -13,16 +13,13 @@ const SignUp = () => {
       </Header>
       <LineImage src={lineIcon} alt="진행" />
       <Content>
-        <Subtitle>로그인에 사용할</Subtitle>
-        <Subtitle>이메일을 입력해주세요.</Subtitle>
+        <Subtitle>인증 번호를 입력해주세요.</Subtitle>
         <InputContainer>
           <Input type="email" />
         </InputContainer>
       </Content>
       <ButtonWrapper>
-        <Button href="/SignUpEmail" onClick={(e) => {}}>
-          인증 번호 전송
-        </Button>
+        <Button>인증번호 전송</Button>
       </ButtonWrapper>
     </Container>
   );
@@ -92,7 +89,7 @@ const ButtonWrapper = styled.div`
   padding: 24px;
 `;
 
-const Button = styled.a`
+const Button = styled.button`
   width: 100%;
   padding: 15px;
   background-color: #9fc7c0;
@@ -103,4 +100,4 @@ const Button = styled.a`
   color: white;
 `;
 
-export default SignUp;
+export default SignUpEmail;
